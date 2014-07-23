@@ -1,0 +1,5 @@
+Changelog for Hodor.
+
+1.0.0 pl
+==============
+- Hodor!
