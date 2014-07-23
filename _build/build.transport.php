@@ -47,8 +47,23 @@ $category= $modx->newObject('modCategory');
 $category->set('id',1);
 $category->set('category',PKG_NAME);
 
-/* add snippets */
-$snippets = include $sources['data'].'transport.snippets.php';
+$snippets = array();
+$snippet = $modx->newObject('modSnippet');
+$snippet->fromArray(array(
+    'id' => 0
+    ,'name' => 'hodor'
+    ,'description' => 'Hodor!'
+    ,'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.hodor.php')
+    ,'static' => 1
+    ,'source' => 1
+    ,'static_file' => 'core/components/'.PKG_NAME_LOWER.'/elements/snippets/snippet.hodor.php'
+),'',true,true);
+
+$properties = include $sources['build'].'properties/properties.'.$v.'.php';
+$snippet->setProperties($properties);
+
+$snippets[] = $snippet;
+
 if (!is_array($snippets)) {
     $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in snippets.');
 } else {
@@ -102,3 +117,10 @@ $totalTime= sprintf("%2.4f s", $totalTime);
 
 $modx->log(modX::LOG_LEVEL_INFO,"\n<br />Execution time: {$totalTime}\n");
 echo '</pre>';
+
+function getSnippetContent($filename) {
+    $file = trim(file_get_contents($filename));
+    preg_match('#\<\?php(.*)#is', $file, $data);
+
+    return rtrim(rtrim(trim($data[1]),'?>'));
+}
