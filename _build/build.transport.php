@@ -51,7 +51,7 @@ $snippets = array();
 $snippet = $modx->newObject('modSnippet');
 $snippet->fromArray(array(
     'id' => 0
-    ,'name' => 'hodor'
+    ,'name' => 'Hodor'
     ,'description' => 'Hodor!'
     ,'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.hodor.php')
     ,'static' => 1
