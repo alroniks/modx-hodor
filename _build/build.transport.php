@@ -59,9 +59,6 @@ $snippet->fromArray(array(
     ,'static_file' => 'core/components/'.PKG_NAME_LOWER.'/elements/snippets/snippet.hodor.php'
 ),'',true,true);
 
-$properties = include $sources['build'].'properties/properties.'.$v.'.php';
-$snippet->setProperties($properties);
-
 $snippets[] = $snippet;
 
 if (!is_array($snippets)) {
@@ -80,7 +77,7 @@ $attr = array(
     xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
         'Snippets' => array(
             xPDOTransport::PRESERVE_KEYS => false,
-            xPDOTransport::UPDATE_OBJECT => BUILD_SNIPPET_UPDATE,
+            xPDOTransport::UPDATE_OBJECT => true,
             xPDOTransport::UNIQUE_KEY => 'name',
         )
     ),
